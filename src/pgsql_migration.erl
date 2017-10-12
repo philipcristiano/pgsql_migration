@@ -9,7 +9,7 @@ migrate(Conn, Version, Dir) ->
     Migrations = migrations(Dir),
     BinVersion = list_to_binary(Version),
     case ?DRIVER:squery(Conn, "SELECT id FROM migrations ORDER BY id DESC") of
-        {error, {error, error, <<"42P01">>, _, _}} ->
+        {error, {error, error, <<"42P01">>, _, _, _}} ->
             %% support legacy error message arity
             init_migrations(Conn),
             migrate(Conn, Version, Dir);
